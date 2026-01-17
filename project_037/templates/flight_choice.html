@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 style="margin-bottom: 30px;">Select Your Flight</h1>
+
+{% if flights %}
+
+<div class="flights-cards">
+
+    {% for flight in flights %}
+    <div class="flight-card">
+
+        <!-- Left -->
+        <div class="flight-left">
+            <div class="flight-id">
+                Flight {{ flight.flight_id }}
+            </div>
+            <div class="flight-route">
+                {{ flight.origin }} → {{ flight.destination }}
+            </div>
+        </div>
+
+        <!-- Middle -->
+        <div class="flight-middle">
+            <div><strong>Departure:</strong> {{ flight.departure_date }} {{ flight.departure_time }}</div>
+            <div><strong>Arrival:</strong> {{ flight.arrival_date }} {{ flight.arrival_time }}</div>
+        </div>
+
+        <!-- Right -->
+        <div class="flight-right">
+            <form method="post" action="/select_flight">
+                <input type="hidden" name="flight_id" value="{{ flight.flight_id }}">
+                <button type="submit" class="select-btn">Select</button>
+            </form>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% else %}
+<p>No flights available.</p>
+{% endif %}
+
+{% endblock %}

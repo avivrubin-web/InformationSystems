@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h2 class="hero-title">Cancellation Rates</h2>
+    <p class="hero-subtitle">Cancellation Rate by Month</p>
+</div>
+
+<div class="table-container">
+    <table class="report-table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Cancellation Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ "%.2f"|format(row[2]) }}%</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">No data available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div style="margin-top: 30px;">
+    <a href="/view_reports" style="color:#0F6D6F; font-weight:600;">← Back to Reports</a>
+</div>
+{% endblock %}

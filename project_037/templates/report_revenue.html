@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h2 class="hero-title">Revenue Report</h2>
+    <p class="hero-subtitle">Revenue by Manufacturer, Size & Class</p>
+</div>
+
+<div class="table-container">
+    <table class="report-table">
+        <thead>
+            <tr>
+                <th>Manufacturer</th>
+                <th>Airplane Size</th>
+                <th>Seat Class</th>
+                <th>Total Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>${{ "{:,.2f}".format(row[3]) }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No data available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div style="margin-top: 30px;">
+    <a href="/view_reports" style="color:#0F6D6F; font-weight:600;">← Back to Reports</a>
+</div>
+{% endblock %}

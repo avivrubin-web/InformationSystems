@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Flights Board</h1>
+
+<p style="margin-bottom: 20px;">
+    Showing upcoming flights and flights currently in the air.
+</p>
+
+{% if flights %}
+
+<div class="flights-cards">
+
+    {% for f in flights %}
+    <div class="flight-card">
+
+        <div class="flight-left">
+            <div class="flight-id">Flight {{ f[0] }}</div>
+            <div class="flight-route">{{ f[1] }} → {{ f[2] }}</div>
+        </div>
+
+        <div class="flight-middle">
+            <div><strong>Date:</strong> {{ f[3] }}</div>
+            <div><strong>Departure:</strong> {{ f[4] }}</div>
+            <div><strong>Duration:</strong> {{ f[5] }}</div>
+        </div>
+
+        <div class="flight-right">
+            <div class="flight-status">
+                {% if f[6] == "IN_AIR" %}
+                    ✈️ On Air
+                {% else %}
+                    🕒 Upcoming
+                {% endif %}
+            </div>
+
+            <form method="post" action="/select_flight">
+                <input type="hidden" name="flight_id" value="{{ f[0] }}">
+                <button type="submit" class="select-btn">Select</button>
+            </form>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% else %}
+<p>No flights to display at the moment.</p>
+{% endif %}
+
+
+{% if not flights %}
+<p>No flights to display at the moment.</p>
+{% endif %}
+
+{% endblock %}

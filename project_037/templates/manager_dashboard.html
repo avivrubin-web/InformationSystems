@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+  <h1 class="hero-title">Manager Dashboard</h1>
+  <p class="hero-subtitle">Manage flights, employees, and system data</p>
+</div>
+
+<div class="actions-grid">
+  <a href="/add_flight" class="action-card">
+    <h3>Add Flight</h3>
+    <p>Schedule a new flight</p>
+  </a>
+
+  <a href="/manager_cancel_flights" class="action-card">
+    <h3>Cancel Flight</h3>
+    <p>Cancel scheduled flights</p>
+  </a>
+
+  <a href="/add_employee" class="action-card">
+    <h3>Add Employee</h3>
+    <p>Register pilots and attendants</p>
+  </a>
+
+  <a href="/add_airplane" class="action-card">
+    <h3>Add Airplane</h3>
+    <p>Register new aircraft</p>
+  </a>
+
+  <a href="/view_reports" class="action-card">
+    <h3>View Reports</h3>
+    <p>System analytics and data</p>
+  </a>
+
+  <a href="/manager_flights_board" class="action-card">
+    <h3>Flights Board</h3>
+    <p>View all flights status</p>
+  </a>
+</div>
+{% endblock %}

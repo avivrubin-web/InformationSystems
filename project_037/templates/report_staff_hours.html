@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h2 class="hero-title">Staff Flight Hours</h2>
+</div>
+
+<div class="table-container">
+    <table class="report-table">
+        <thead>
+            <tr>
+                <th style="width: 30%;">Employee ID</th>
+                <th>Short Flights (< 6h)</th>
+                <th>Long Flights (≥ 6h)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">No data available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div style="margin-top: 30px;">
+    <a href="/view_reports" style="color:#0F6D6F; font-weight:600;">← Back to Reports</a>
+</div>
+{% endblock %}

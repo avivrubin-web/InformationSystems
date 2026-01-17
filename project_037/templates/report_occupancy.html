@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="hero">
+    <h2 class="hero-title">Average Flight Occupancy</h2>
+</div>
+
+<div class="card" style="text-align: center; max-width: 400px; margin: 0 auto;">
+    <h3 style="margin-bottom: 20px; color: var(--text);">Overall System Average</h3>
+    <div style="font-size: 3.5em; font-weight: 800; color: var(--primary);">
+        {{ "%.2f"|format(avg_occupancy * 100) }}%
+    </div>
+</div>
+
+<div style="margin-top: 30px; text-align: center;">
+    <a href="/view_reports" style="color:#0F6D6F; font-weight:600;">← Back to Reports</a>
+</div>
+
+{% endblock %}

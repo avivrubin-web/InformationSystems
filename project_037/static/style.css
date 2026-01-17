@@ -1,0 +1,838 @@
+/* ===== RESET ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+/* ===== COLORS ===== */
+:root {
+    --primary: #0f6f6d;
+    --title-blue: #1f4e79;
+    --primary-dark: #0a4f4e;
+    --accent: #1fc7c3;
+    --bg: #f2fafa;
+    --card: #ffffff;
+    --text: #1f2933;
+}
+
+/* ===== BODY + CLOUD BACKGROUND ===== */
+body {
+    min-height: 100vh;
+    color: var(--text);
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(200, 235, 245, 0.95), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(205, 225, 245, 0.95), transparent 45%),
+        linear-gradient(180deg, #e8f4fb 0%, #dfeef7 100%);
+}
+
+
+
+/* ===== LINKS ===== */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===== HEADER ===== */
+/* ======================================================
+   NAVBAR – FINAL BLUE MATCH
+====================================================== */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 50px;
+
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+
+    border-bottom: 1px solid rgba(200, 220, 235, 0.7);
+}
+
+.header-left span {
+    font-family: inherit;
+    /* אותו פונט כמו האתר */
+    font-size: 22px;
+    /* קצת קטן מה-H1 */
+    font-weight: 700;
+    /* כמו ה-Welcome */
+    color: var(--title-blue);
+}
+
+
+.header-nav a {
+    margin-left: 28px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--title-blue);
+    position: relative;
+    padding-bottom: 4px;
+    transition: opacity 0.2s ease;
+}
+
+/* hover עדין – בלי צבע חדש */
+.header-nav a:hover {
+    opacity: 0.75;
+}
+
+/* underline כחול תואם */
+.header-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--title-blue);
+    transition: width 0.3s ease;
+}
+
+.header-nav a:hover::after {
+    width: 100%;
+}
+
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(6px);
+}
+
+/* ===== HERO ===== */
+.hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero-title {
+    font-size: 42px;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.hero-subtitle {
+    font-size: 22px;
+    color: #111111;
+}
+
+/* ===== ACTION CARDS ===== */
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+
+.action-card {
+    background: var(--title-blue);
+    /* Blue background */
+    border-radius: 18px;
+    padding: 32px 24px;
+    text-align: center;
+    /* White text */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    /* Tiny bit of shadow */
+    border: 1px solid #163e63;
+    transition: all 0.25s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(31, 78, 121, 0.25);
+    background-color: #163e63;
+    /* Slightly darker on hover */
+    border-color: #163e63;
+}
+
+.action-card .icon {
+    font-size: 36px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 14px;
+}
+
+.action-card h3 {
+    font-size: 20px;
+    color: white;
+    /* White header */
+    margin-bottom: 8px;
+}
+
+.action-card p {
+    font-size: 14px;
+    color: white;
+}
+
+/* ===== FORMS ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+input,
+select {
+    padding: 10px 12px;
+    border-radius: 10px;
+    /* Updated to 10px to match flight search */
+    border: 2px solid var(--title-blue);
+    /* Updated to blue border */
+    font-size: 15px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.15);
+    /* Focus effect */
+}
+
+/* ===== BUTTONS ===== */
+button {
+    background-color: var(--title-blue);
+    /* Updated to Dark Blue */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+    /* Consistent hover effect */
+    background-color: #163e63;
+    /* Slightly darker blue */
+}
+
+/* Keep accent color for specific cases if needed, or remove override */
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #7B8A8B;
+    margin-top: 60px;
+}
+
+/* ===== FLIGHT SELECTION – CLICKABLE CARDS ===== */
+
+.flight-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.flight-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 26px;
+    border-radius: 14px;
+    background: var(--card);
+    border: 2px solid #e6eeee;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* ===== HOVER ONLY FOR SEARCH RESULTS ===== */
+.flight-cards .flight-card:hover {
+    border-color: var(--accent);
+    background-color: #f7fefe;
+    box-shadow: 0 12px 28px rgba(15, 111, 109, 0.18);
+    transform: translateY(-3px);
+}
+
+/* ===== NO HOVER FOR FLIGHTS BOARD ===== */
+.flights-cards .flight-card:hover {
+    border-color: transparent;
+    background-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: none;
+    cursor: default;
+}
+
+
+.flight-card h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.flight-card p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #5b6b73;
+}
+
+.flight-main,
+.flight-time {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== TABS FIX ===== */
+.tab-section {
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== SEAT MAP ===== */
+
+.seat-grid {
+    display: grid;
+    /* 3 seats, 40px gap, 3 seats. Total 6 cols + gap */
+    grid-template-columns: 70px 70px 70px 40px 70px 70px 70px;
+    gap: 14px 12px;
+    /* Vertical gap 14px, Horizontal gap 12px */
+    margin: 30px 0;
+    justify-content: center;
+    /* Center the grid */
+}
+
+.seat {
+    height: 60px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+/* 상태ים */
+.seat.unavailable {
+    background: #d6d6d6;
+    color: #888;
+    cursor: not-allowed;
+}
+
+.seat.economy {
+    background: #4da6ff;
+    color: white;
+}
+
+.seat.business {
+    background: #1e3a8a;
+    color: white;
+}
+
+.seat.selected {
+    background: #1fc7c3;
+    color: white;
+}
+
+/* hover רק לפנויים */
+.seat.economy:hover,
+.seat.business:hover {
+    transform: scale(1.05);
+}
+
+/* ===== SEAT LEGEND ===== */
+.seat-legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.seat-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+}
+
+.seat-box.booked {
+    background: #cfcfcf;
+}
+
+.seat-box.economy {
+    background: #5dade2;
+}
+
+.seat-box.business {
+    background: #0b4f7a;
+}
+
+.seat-box.selected {
+    background: #1fc7c3;
+}
+
+.hint {
+    margin: 10px 0 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.manager-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    margin-top: 30px;
+}
+
+.manager-link {
+    display: block;
+    padding: 12px;
+    background-color: #0f6f6d;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.manager-link:hover {
+    background-color: #0a4f4e;
+}
+
+/* ===== EMPLOYEE FORM GRID ===== */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+form button {
+    margin-top: 30px;
+}
+
+/* ===== SUCCESS MESSAGE ===== */
+.alert.success {
+    background: #e6f9f8;
+    border: 1px solid var(--accent);
+    color: var(--primary-dark);
+    padding: 16px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-link {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.error-box {
+    background: #ffe6e6;
+    color: #a30000;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.checkbox-row {
+    display: block;
+    margin: 6px 0;
+}
+
+.flash {
+    transition: opacity 0.5s ease;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+.home-hero {
+    position: relative;
+    padding: 50px 60px 60px;
+    border-radius: 24px;
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)),
+        url("/static/images/background.jpg") center / cover no-repeat;
+}
+
+/* ===== TITLES COLOR UPGRADE ===== */
+
+.hero-title,
+h1,
+h2,
+h3 {
+    color: var(--title-blue);
+}
+
+/* ===== HERO TITLE GLOW ===== */
+.hero-title {
+    position: relative;
+    text-shadow:
+        0 0 8px rgba(120, 190, 255, 0.35),
+        0 0 18px rgba(120, 190, 255, 0.25),
+        0 0 30px rgba(120, 190, 255, 0.15);
+}
+
+/* ===== HERO LOGO ===== */
+.hero-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.hero-logo img {
+    height: 90px;
+    /* אפשר 80–110 */
+    object-fit: contain;
+    opacity: 0.95;
+}
+
+/* ===== FLIGHTS FORM INPUTS ===== */
+#search-section input {
+    border: 2px solid var(--title-blue);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 16px;
+}
+
+/* focus יותר יפה */
+#search-section input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(31, 78, 121, 0.15);
+}
+
+/* ===== FLIGHTS PAGE HEADER SPACING ===== */
+h1 {
+    margin-bottom: 20px;
+}
+
+.tabs {
+    margin-bottom: 28px;
+}
+
+/* ===== TABS COLOR MATCH TITLE ===== */
+.tab-btn {
+    background-color: var(--title-blue);
+    color: white;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 600;
+    border: none;
+}
+
+/* טאב פעיל – קצת יותר כהה */
+.tab-btn.active {
+    background-color: #163e63;
+    /* כהה בקטנה מה-title-blue */
+}
+
+/* ===== SEARCH BUTTON ===== */
+#search-section button {
+    background-color: var(--title-blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 30px;
+    /* המרווח שדיברנו עליו */
+    cursor: pointer;
+}
+
+#search-section button:hover {
+    opacity: 0.9;
+}
+
+/* ===== FLIGHTS BOARD – CARD VIEW ===== */
+
+.flights-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.flight-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px 26px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: default;
+}
+
+/* שמאל */
+.flight-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 0 0 250px;
+    /* Fixed width to prevent shifting */
+}
+
+.flight-id {
+    font-weight: 700;
+    color: var(--title-blue);
+}
+
+.flight-route {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* אמצע */
+.flight-middle {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 Equal columns */
+    gap: 10px;
+    font-size: 15px;
+    align-items: center;
+    /* Vertical align */
+}
+
+/* ימין */
+.flight-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    flex: 0 0 120px;
+    /* Fixed width */
+}
+
+.flight-status {
+    font-weight: 600;
+    color: var(--title-blue);
+}
+
+/* כפתור */
+.select-btn {
+    background-color: var(--title-blue);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.select-btn:hover {
+    opacity: 0.9;
+}
+
+/* ===== SEATS: CONTINUE BUTTON ===== */
+#seatForm button[type="submit"] {
+    background-color: var(--title-blue);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#seatForm button[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+
+/* ===== SEATS: BOOKED ===== */
+.seat.booked {
+    background-color: #e9ecef;
+    /* אפור בהיר */
+    color: #8a8f98;
+    border: 1px solid #d3d7dd;
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+/* ===== PHONE INPUT GROUP ===== */
+.phones-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.phone-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.phone-row input {
+    flex: 1;
+}
+
+/* Link to add more phones */
+.add-phone-link {
+    background-color: transparent !important;
+    border: none;
+    color: var(--title-blue) !important;
+    /* Darker blue */
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 0;
+    margin-top: 5px;
+    display: inline-block;
+    text-align: left;
+    position: relative;
+    /* For the underline */
+    padding-bottom: 2px;
+    /* Space for underline */
+}
+
+/* Animated underline like Navbar */
+.add-phone-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--title-blue);
+    transition: width 0.3s ease;
+}
+
+.add-phone-link:hover::after {
+    width: 100%;
+}
+
+.add-phone-link:hover {
+    opacity: 0.8;
+}
+
+/* ===== TABLES ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: var(--title-blue);
+    color: white;
+    font-weight: 600;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* ===== REPORTS TABLE ===== */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.report-table th,
+.report-table td {
+    padding: 18px;
+    text-align: center;
+    /* Center alignment as requested */
+    border-bottom: 1px solid #eee;
+}
+
+.report-table th {
+    background-color: var(--title-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.report-table tr:hover {
+    background-color: #f2fafa;
+    /* Light blue hover */
+}
+
+/* ===== REPORTS LIST LAYOUT ===== */
+.reports-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.reports-list .action-card {
+    text-align: left;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reports-list .action-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.reports-list .action-card p {
+    margin: 0;
+    opacity: 0.9;
+}

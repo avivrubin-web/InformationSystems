@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Flight Summary</h1>
+<p class="subtitle">Please review the flight details before confirmation</p>
+
+<div class="form-grid">
+    <div class="form-group">
+        <label>Origin</label>
+        <input value="{{ flight_data.origin }}" disabled>
+    </div>
+
+    <div class="form-group">
+        <label>Destination</label>
+        <input value="{{ flight_data.destination }}" disabled>
+    </div>
+
+    <div class="form-group">
+        <label>Departure Date</label>
+        <input value="{{ flight_data.departure_date }}" disabled>
+    </div>
+
+    <div class="form-group">
+        <label>Departure Time</label>
+        <input value="{{ flight_data.departure_time }}" disabled>
+    </div>
+
+    <div class="form-group">
+        <label>Airplane</label>
+        <input value="{{ airplane_id }}" disabled>
+    </div>
+
+    <div class="form-group">
+        <label>Duration</label>
+        <input value="{{ flight_data.duration }}" disabled>
+    </div>
+
+    <div class="form-group">
+        <label>Economy Price</label>
+        <input value="{{ prices.economy }}" disabled>
+    </div>
+
+    {% if prices.business %}
+    <div class="form-group">
+        <label>Business Price</label>
+        <input value="{{ prices.business }}" disabled>
+    </div>
+    {% endif %}
+</div>
+
+<form method="POST" action="/confirm_flight" style="margin-top: 30px;">
+    <button type="submit">Confirm Flight</button>
+</form>
+
+
+<div style="margin-top: 30px;">
+    <a href="/manager_dashboard" style="color:#0F6D6F; font-weight:600;">← Back to Dashboard</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-container">
+    <h1>Manager Login</h1>
+    <p class="subtitle">Please enter your manager ID and password.</p>
+
+    <form method="post">
+        <label for="manager_id">Manager ID</label>
+        <input type="text" id="manager_id" name="manager_id" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}

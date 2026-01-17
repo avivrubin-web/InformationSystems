@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Select Crew</h1>
+
+{% if not_enough_pilots or not_enough_attendants %}
+<div class="message error">
+    {% if not_enough_pilots %}
+    <p>❌ There are not enough available pilots for this flight.</p>
+    {% endif %}
+    {% if not_enough_attendants %}
+    <p>❌ There are not enough available flight attendants for this flight.</p>
+    {% endif %}
+
+    <a href="/add_flight" style="font-weight: bold; margin-top: 10px; display: inline-block;">
+        ← Back to Add Flight
+    </a>
+</div>
+{% endif %}
+
+<form method="POST">
+
+    <h3 style="margin-top: 20px;">Pilots (select {{ required_pilots }})</h3>
+    <div class="form-grid" style="grid-template-columns: 1fr;">
+        {% if pilots|length < required_pilots %} <p class="error-text">Not enough available pilots.</p>
+            {% else %}
+            {% for pilot in pilots %}
+            <label class="checkbox-item"
+                style="display: flex; align-items: center; gap: 10px; padding: 10px; background: white; border-radius: 6px; border: 1px solid #eee;">
+                <input type="checkbox" name="selected_pilots" value="{{ pilot[0] }}" style="width: auto; margin: 0;">
+                {{ pilot[1] }} {{ pilot[2] }}
+            </label>
+            {% endfor %}
+            {% endif %}
+    </div>
+
+    <h3 style="margin-top: 20px;">Flight Attendants (select {{ required_attendants }})</h3>
+    <div class="form-grid" style="grid-template-columns: 1fr;">
+        {% if attendants|length < required_attendants %} <p class="error-text">Not enough available flight attendants.
+            </p>
+            {% else %}
+            {% for attendant in attendants %}
+            <label class="checkbox-item"
+                style="display: flex; align-items: center; gap: 10px; padding: 10px; background: white; border-radius: 6px; border: 1px solid #eee;">
+                <input type="checkbox" name="selected_attendants" value="{{ attendant[0] }}"
+                    style="width: auto; margin: 0;">
+                {{ attendant[1] }} {{ attendant[2] }}
+            </label>
+            {% endfor %}
+            {% endif %}
+    </div>
+
+    {% if pilots|length >= required_pilots and attendants|length >= required_attendants %}
+    <button type="submit" id="continueBtn" disabled style="margin-top: 30px;">Continue</button>
+    {% else %}
+    <p class="error-text" style="margin-top: 20px;">Not enough crew members to continue.</p>
+    {% endif %}
+
+</form>
+
+<script>
+    function limitSelection(name, max) {
+        const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
+        checkboxes.forEach(cb => {
+            cb.addEventListener("change", () => {
+                const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+                if (checked.length >= max) {
+                    checkboxes.forEach(box => {
+                        if (!box.checked) box.disabled = true;
+                    });
+                } else {
+                    checkboxes.forEach(box => box.disabled = false);
+                }
+                toggleContinue();
+            });
+        });
+    }
+
+    function toggleContinue() {
+        const pilotsSelected = document.querySelectorAll('input[name="selected_pilots"]:checked').length;
+        const attendantsSelected = document.querySelectorAll('input[name="selected_attendants"]:checked').length;
+        document.getElementById("continueBtn").disabled =
+            pilotsSelected !== {{ required_pilots }
+    } ||
+        attendantsSelected !== {{ required_attendants }};
+}
+
+    limitSelection("selected_pilots", {{ required_pilots }});
+    limitSelection("selected_attendants", {{ required_attendants }});
+</script>
+
+<div style="margin-top: 30px;">
+    <a href="/manager_dashboard" style="color:#0F6D6F; font-weight:600;">← Back to Dashboard</a>
+</div>
+
+{% endblock %}

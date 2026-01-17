@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Order Confirmed</h1>
+
+<p style="margin-bottom: 20px;">
+    Your order has been successfully confirmed!
+</p>
+
+<div class="message success">
+    Reservation Code: <strong>{{ reservation_code }}</strong>
+</div>
+
+<p style="margin-top: 30px;">
+    Please save your reservation code for future reference.
+</p>
+
+<div style="margin-top: 30px;">
+    <a href="/flights" style="color:#0F6D6F; font-weight:600;">
+        Back to flights page
+    </a>
+</div>
+{% endblock %}

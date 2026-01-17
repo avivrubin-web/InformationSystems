@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-container">
+    <h1>Registered User Login</h1>
+    <p class="subtitle">Please enter your email and password to log in.</p>
+
+    <form method="post">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="example@email.com" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p class="auth-footer">
+        Not registered yet?
+        <a href="/sign_up">Sign up here</a>
+    </p>
+</div>
+{% endblock %}

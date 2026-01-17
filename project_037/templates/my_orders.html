@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Orders</h1>
+
+<form method="get" class="filter-form" style="margin-bottom: 20px;">
+    <div class="form-group">
+        <label for="status">Filter by status:</label>
+        <select name="status" id="status" onchange="this.form.submit()">
+            <option value="">All</option>
+            <option value="active" {% if selected_status=='active' %}selected{% endif %}>Active</option>
+            <option value="cancelled_by_customer" {% if selected_status=='cancelled_by_customer' %}selected{% endif %}>
+                Cancelled by Customer
+            </option>
+            <option value="system cancellation" {% if selected_status=='system cancellation' %}selected{% endif %}>
+                System Cancellation
+            </option>
+        </select>
+    </div>
+</form>
+
+{% if reservations %}
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Reservation Code</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in reservations %}
+            <tr>
+                <td>{{ r[0] }}</td>
+                <td>{{ r[1] }}</td>
+                <td>{{ r[2] }}</td>
+                <td>{{ r[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No reservations found.</p>
+{% endif %}
+
+{% endblock %}

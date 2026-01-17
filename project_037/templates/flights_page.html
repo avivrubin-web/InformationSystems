@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ===== FLASH MESSAGES ===== -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+ <div class="flash-container" id="flashContainer">
+    {% for category, message in messages %}
+        <div class="flash {{ category }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+
+  {% endif %}
+{% endwith %}
+
+<h1>Flights</h1>
+
+<!-- ===== TABS ===== -->
+<div class="tabs">
+    <button id="tab-search" class="tab-btn active" type="button">
+         Search Flights
+    </button>
+    <button id="tab-board" class="tab-btn" type="button">
+         Flights Board
+    </button>
+</div>
+
+<!-- ===== SEARCH FLIGHTS (DEFAULT) ===== -->
+<div id="search-section" class="tab-section">
+    <h2>Search Flights</h2>
+
+    <form method="post" action="/flights">
+        <label>Origin City</label>
+<input type="text" name="origin" list="cities" required>
+
+<label>Destination City</label>
+<input type="text" name="destination" list="cities" required>
+
+<datalist id="cities">
+    {% for city in cities %}
+        <option value="{{ city }}">
+    {% endfor %}
+</datalist>
+
+
+      <label>Departure Date</label>
+        <input type="date" name="date" min="{{ today }}" required>
+
+        <label>Number of Passengers</label>
+        <input type="number" name="num_of_passengers" min="1" required>
+
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<!-- ===== FLIGHTS BOARD ===== -->
+<div id="board-section" class="tab-section hidden">
+    <h2>Flights Board</h2>
+
+ {% if flights %}
+
+<div class="flights-cards">
+
+    {% for f in flights %}
+    <div class="flight-card">
+
+        <div class="flight-left">
+            <div class="flight-id">Flight {{ f.flight_id }}</div>
+            <div class="flight-route">
+                {{ f.origin }} → {{ f.destination }}
+            </div>
+        </div>
+
+        <div class="flight-middle">
+            <div><strong>Date:</strong> {{ f.date }}</div>
+            <div><strong>Departure:</strong> {{ f.time }}</div>
+            <div><strong>Duration:</strong> {{ f.duration }}</div>
+        </div>
+
+        <div class="flight-right">
+            <div class="flight-status">
+                {% if f.status == "IN_AIR" %}
+                    ✈️ On Air
+                {% else %}
+                    🕒 Upcoming
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% else %}
+<p>No flights to display.</p>
+{% endif %}
+
+
+<!-- ===== TABS SCRIPT ===== -->
+<script>
+const tabSearch = document.getElementById("tab-search");
+const tabBoard = document.getElementById("tab-board");
+
+const searchSection = document.getElementById("search-section");
+const boardSection = document.getElementById("board-section");
+
+tabSearch.addEventListener("click", () => {
+    tabSearch.classList.add("active");
+    tabBoard.classList.remove("active");
+    searchSection.classList.remove("hidden");
+    boardSection.classList.add("hidden");
+});
+
+tabBoard.addEventListener("click", () => {
+    tabBoard.classList.add("active");
+    tabSearch.classList.remove("active");
+    boardSection.classList.remove("hidden");
+    searchSection.classList.add("hidden");
+});
+
+setTimeout(() => {
+    const flash = document.getElementById("flashContainer");
+    if (flash) {
+        flash.style.opacity = "0";
+        flash.style.transition = "opacity 0.5s ease";
+
+        setTimeout(() => flash.remove(), 500);
+    }
+}, 3000);
+</script>
+
+
+{% endblock %}

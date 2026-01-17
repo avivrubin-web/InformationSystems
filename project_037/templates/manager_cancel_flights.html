@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Cancel Flight</h1>
+<p class="subtitle" style="margin-bottom: 20px;">
+    Managers may cancel flights only if they are scheduled at least
+    <strong>72 hours in advance</strong>.
+</p>
+
+{% if flights %}
+<div class="table-container">
+    <table class="flights-table">
+        <thead>
+            <tr>
+                <th>Flight ID</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Departure</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in flights %}
+            <tr>
+                <td>{{ f.flight_id }}</td>
+                <td>{{ f.origin }}</td>
+                <td>{{ f.destination }}</td>
+                <td>{{ f.departure_date }} {{ f.departure_time }}</td>
+                <td>
+                    <form method="post" action="/manager_cancel_flights"
+                        onsubmit="return confirm('Are you sure you want to cancel this flight? All passengers will receive a full refund.')">
+                        <input type="hidden" name="flight_id" value="{{ f.flight_id }}">
+                        <button type="submit" style="background-color: #d9534f; padding: 6px 12px; font-size: 14px;">
+                            Cancel ❌
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No flights available for cancellation.</p>
+{% endif %}
+
+<div style="margin-top: 30px;">
+    <a href="/manager_dashboard" style="color:#0F6D6F; font-weight:600;">← Back to Dashboard</a>
+</div>
+
+{% endblock %}

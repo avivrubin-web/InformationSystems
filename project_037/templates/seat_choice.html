@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Select Seats</h1>
+
+<p class="subtitle">
+    Please select {{ num_of_passengers }} seats
+</p>
+
+<div class="seat-legend">
+    <div class="legend-item">
+        <span class="seat-box booked"></span> Booked
+    </div>
+    <div class="legend-item">
+        <span class="seat-box economy"></span> Economy
+    </div>
+    <div class="legend-item">
+        <span class="seat-box business"></span> Business
+    </div>
+    <div class="legend-item">
+        <span class="seat-box selected"></span> Selected
+    </div>
+</div>
+
+<form method="post" action="/confirm_seats" id="seatForm">
+
+    <div class="seat-grid">
+        {% for seat in seats %}
+        {% set row = seat[0] %}
+        {% set col = seat[1] %}
+        {% set seat_class = seat[2] %}
+        {% set availability = seat[4] %}
+
+        {% if availability == 'booked' %}
+        <div class="seat booked">
+            {{ row }},{{ col }}
+        </div>
+        {% else %}
+        <div class="seat {{ seat_class }}" data-seat="{{ row }}-{{ col }}">
+            {{ row }},{{ col }}
+        </div>
+        {% endif %}
+
+        {% if loop.index % 6 == 3 %}
+        <div class="aisle-spacer"></div>
+        {% endif %}
+
+        {% endfor %}
+    </div>
+
+    <input type="hidden" name="seats" id="selectedSeats">
+    <div style="margin-top: 30px;">
+        <button type="submit">Continue</button>
+    </div>
+</form>
+
+<script>
+    const maxSeats = {{ num_of_passengers }};
+    const selected = new Set();
+
+    document.querySelectorAll(".seat.economy, .seat.business").forEach(seat => {
+        seat.addEventListener("click", () => {
+            if (seat.classList.contains("booked")) return;
+
+            const id = seat.dataset.seat;
+
+            if (seat.classList.contains("selected")) {
+                seat.classList.remove("selected");
+                selected.delete(id);
+            } else {
+                if (selected.size >= maxSeats) return;
+                seat.classList.add("selected");
+                selected.add(id);
+            }
+
+            document.getElementById("selectedSeats").value =
+                Array.from(selected).join(",");
+        });
+    });
+</script>
+
+{% endblock %}

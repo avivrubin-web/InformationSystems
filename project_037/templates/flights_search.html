@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <div class="page-header-right">
+        {% if session.get("first_name") %}
+            <span class="hello-text">Hello, {{ session.get("first_name") }}</span>
+        {% elif session.get("guest_first_name") %}
+            <span class="hello-text">Hello, {{ session.get("guest_first_name") }}</span>
+        {% endif %}
+    </div>
+</div>
+
+<h1>Search Flights</h1>
+
+<p style="margin-bottom: 20px;">
+    Enter your flight details below.
+</p>
+
+<form method="post">
+
+    <label for="origin_city">Origin City</label>
+    <input
+        type="text"
+        id="origin_city"
+        name="origin_city"
+        placeholder="e.g. Tel Aviv"
+        required
+    >
+
+    <label for="destination_city">Destination City</label>
+    <input
+        type="text"
+        id="destination_city"
+        name="destination_city"
+        placeholder="e.g. Paris"
+        required
+    >
+
+    <label for="departure_date">Departure Date</label>
+    <input
+        type="date"
+        id="departure_date"
+        name="departure_date"
+        required
+    >
+
+    <label for="num_of_passengers">Number of Passengers</label>
+    <input
+        type="number"
+        id="num_of_passengers"
+        name="num_of_passengers"
+        min="1"
+        required
+    >
+
+    <button type="submit">Search Flights</button>
+</form>
+{% endblock %}

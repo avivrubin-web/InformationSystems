@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FLYTAU</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    {% if not hide_nav %}
+    <header class="header">
+        <div class="header-left">
+            <span>FLYTAU</span>
+            {% if session.get("first_name") %}
+            <span style="margin: 0 10px;">-</span>
+            <span>hello {{ session.get("first_name")|lower }}</span>
+            {% endif %}
+        </div>
+
+        <nav class="header-nav">
+
+
+            <!-- תמיד מוצג -->
+            <a href="/flights">Flights</a>
+            <a href="/manage_booking">Manage Booking</a>
+            {% if session.get("who_are_you") == "manager" %}
+            <a href="/manager_dashboard">Manager Dashboard</a>
+            {% elif session.get("who_are_you") != "register" %}
+            <a href="/">Home</a>
+            {% endif %}
+
+            {% if session.get("who_are_you") == "register" %}
+            <a href="/my_orders">My Orders</a>
+            {% endif %}
+
+            {% if session.get("who_are_you") %}
+            <a href="/logout">Logout</a>
+            {% endif %}
+
+
+        </nav>
+    </header>
+    {% endif %}
+
+
+
+
+    <main class="container">
+
+        {# טופס הודעות פלאש #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div id="flash-container">
+            {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {# תמיכה לאחור במשתמש message ישן אם קיים #}
+        {% if message %}
+        <div class="message error">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <script>
+            // העלמת הודעות פלאש אחרי 3 שניות
+            setTimeout(function () {
+                const flashContainer = document.getElementById('flash-container');
+                if (flashContainer) {
+                    flashContainer.style.opacity = '0';
+                    setTimeout(() => flashContainer.remove(), 500); // מחכה לסיום ה-transition
+                }
+            }, 3000);
+        </script>
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        © 2026 FLYTAU – Flight Management System
+    </footer>
+
+</body>
+
+</html>

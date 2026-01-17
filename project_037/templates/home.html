@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="home-hero">
+
+    <div class="hero">
+        <div class="hero-logo">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="FLYTAU Logo">
+</div>
+        <h1 class="hero-title">Welcome to FLYTAU</h1>
+        <p class="hero-subtitle">
+            Your journey starts here.
+        </p>
+    </div>
+
+    <div class="actions-grid">
+        <a href="/flights" class="action-card">
+            <h3>Continue as Guest</h3>
+            <p>Search flights without registration</p>
+        </a>
+
+        <a href="/login" class="action-card">
+            <h3>Registered User Login</h3>
+            <p>Access your bookings and orders</p>
+        </a>
+
+        <a href="/sign_up" class="action-card">
+            <h3>Sign Up</h3>
+            <p>Create a new FLYTAU account</p>
+        </a>
+
+        <a href="/manager_login" class="action-card">
+            <h3>Manager Login</h3>
+            <p>Manage flights and system data</p>
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

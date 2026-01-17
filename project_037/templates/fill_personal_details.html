@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Passenger Details</h1>
+
+<p style="margin-bottom: 20px;">
+    Please enter your personal details to complete the reservation.
+</p>
+
+<form method="post" id="search-section">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="first_name">First Name</label>
+    <input type="text" id="first_name" name="first_name" required>
+
+    <label for="last_name">Last Name</label>
+    <input type="text" id="last_name" name="last_name" required>
+
+    <label for="passport_number">Passport Number</label>
+    <input type="text" id="passport_number" name="passport_number" required>
+
+    <label for="birth_date">Birth Date</label>
+    <input type="date" id="birth_date" name="birth_date" required>
+
+    <label>Phone Numbers</label>
+
+    <div id="phones-container" class="phones-container">
+        <div class="phone-row">
+            <input type="text" name="phone_numbers" placeholder="05XXXXXXXX" required>
+        </div>
+    </div>
+
+    <button type="button" class="add-phone-link" onclick="addPhoneField()">+ Add another phone number</button>
+
+    <small style="color:#666; display:block; margin-bottom:15px; margin-top: 10px;">
+        At least one phone number is required. You may add more if you wish.
+    </small>
+
+    <button type="submit">Continue</button>
+
+</form>
+
+<script>
+    function addPhoneField() {
+        const container = document.getElementById("phones-container");
+
+        const row = document.createElement("div");
+        row.className = "phone-row";
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = "phone_numbers";
+        input.placeholder = "05XXXXXXXX";
+
+        row.appendChild(input);
+        container.appendChild(row);
+    }
+</script>
+
+{% endblock %}

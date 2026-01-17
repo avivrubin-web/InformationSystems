@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h1 class="hero-title">Manager Reports</h1>
+    <p class="hero-subtitle">System analytics and performance metrics</p>
+</div>
+
+<div class="reports-list">
+    <a href="/report_occupancy" class="action-card">
+        <h3>Occupancy</h3>
+        <p>Average flight occupancy</p>
+    </a>
+
+    <a href="/report_revenue" class="action-card">
+        <h3>Revenue</h3>
+        <p>Revenue by manufacturer & class</p>
+    </a>
+
+    <a href="/report_staff_hours" class="action-card">
+        <h3>Staff Hours</h3>
+        <p>Flight hours per employee</p>
+    </a>
+
+    <a href="/report_cancellation" class="action-card">
+        <h3>Cancellations</h3>
+        <p>Monthly cancellation rates</p>
+    </a>
+
+    <a href="/report_utilization" class="action-card">
+        <h3>Utilization</h3>
+        <p>Airplane utilization stats</p>
+    </a>
+
+</div>
+
+<div style="margin-top: 30px; text-align: center;">
+    <a href="/manager_dashboard" style="color:#1f4e79; font-weight:600; text-decoration: none; font-size: 1.1em;">← Back
+        to Dashboard</a>
+</div>
+{% endblock %}

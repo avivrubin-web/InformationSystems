@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Add New Employee</h1>
+<p class="subtitle">Create a new pilot or flight attendant</p>
+
+<form method="post">
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Employee Type</label>
+            <select name="employee_type" required>
+                <option value="">Select</option>
+                <option value="pilot">Pilot</option>
+                <option value="attendant">Flight Attendant</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>ID</label>
+            <input type="text" name="employee_id" required>
+        </div>
+
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="first_name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="last_name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="phone_number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Start Work Date</label>
+            <input type="date" name="start_work_date" required>
+        </div>
+
+        <div class="form-group">
+            <label>City</label>
+            <input type="text" name="city" required>
+        </div>
+
+        <div class="form-group">
+            <label>Street</label>
+            <input type="text" name="street" required>
+        </div>
+
+        <div class="form-group">
+            <label>House Number</label>
+            <input type="text" name="house_number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Certification</label>
+            <select name="certification" required>
+                <option value="short">Short Flights Only</option>
+                <option value="long">Long Flights Certified</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" style="margin-top: 30px;">Add Employee</button>
+</form>
+
+
+<div style="margin-top: 30px;">
+    <a href="/manager_dashboard" style="color:#0F6D6F; font-weight:600;">← Back to Dashboard</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Order Details</h1>
+
+<h2>Flight Information</h2>
+
+{% if flight %}
+<div class="table-container">
+    <table>
+        <tr>
+            <th>From</th>
+            <td>{{ flight[5] }}</td>
+        </tr>
+        <tr>
+            <th>To</th>
+            <td>{{ flight[6] }}</td>
+        </tr>
+        <tr>
+            <th>Departure</th>
+            <td>{{ flight[1] }} {{ flight[2] }}</td>
+        </tr>
+        <tr>
+            <th>Arrival</th>
+            <td>{{ flight[3] }} {{ flight[4] }}</td>
+        </tr>
+        {% if flight[0] %}
+        <tr>
+            <th>Flight ID</th>
+            <td>{{ flight[0] }}</td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+{% endif %}
+
+<h3 style="margin-top: 30px;">Seats</h3>
+
+{% if seats %}
+<ul class="seat-list" style="margin-left: 20px; margin-bottom: 20px;">
+    {% for seat in seats %}
+    <li>Seat {{ seat }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No seats selected.</p>
+{% endif %}
+
+
+<h2 style="margin-top: 30px;">Reservation Summary</h2>
+
+{% if reservation %}
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Reservation Code</th>
+            <td>{{ reservation[0] }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ reservation[1] }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ reservation[2] }}</td>
+        </tr>
+        <tr>
+            <th>Time</th>
+            <td>{{ reservation[3] }}</td>
+        </tr>
+        <tr>
+            <th>Total Cost</th>
+            <td>{{ reservation[4] }}</td>
+        </tr>
+    </table>
+</div>
+{% endif %}
+
+<form method="post" action="/confirm_order" style="margin-top: 30px;">
+    <button type="submit">Confirm Order</button>
+</form>
+{% endblock %}
