@@ -1310,9 +1310,6 @@ def report_utilization():
         results = cursor.fetchall()
     return render_template('report_utilization.html', results=results)
 
-def bar():
-    pass
-
 
 if __name__ == "__main__":
     app.run(debug=True)
