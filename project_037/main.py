@@ -1310,7 +1310,7 @@ def report_utilization():
         results = cursor.fetchall()
     return render_template('report_utilization.html', results=results)
 
-def aviv():
+def avi():
     pass
 
 if __name__ == "__main__":
